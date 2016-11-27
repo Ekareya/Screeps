@@ -45,6 +45,66 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ScreepsAutocomplete", "..\S
 		SlnRelativePath = "..\ScreepsAutocomplete\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "test", "..\..\..\AppData\Local\Screeps\scripts\screeps.com\test\", "{C04F259C-F41C-4BD0-AD65-188098E0BB85}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64477"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\test\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64477\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64477"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\test\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64477\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64477"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Benchmark", "..\..\..\AppData\Local\Screeps\scripts\screeps.com\Benchmark\", "{C88ADB4E-BA58-42DA-8174-0176FAFB6DED}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64182"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\Benchmark\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64182\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64182"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\Benchmark\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64182\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64182"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "refactor", "..\..\..\AppData\Local\Screeps\scripts\screeps.com\refactor\", "{A002FE98-5F46-4D24-862B-9CB54F4C8F14}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_63017"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\refactor\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63017\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_63017"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\AppData\Local\Screeps\scripts\screeps.com\refactor\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63017\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63017"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +114,12 @@ Global
 		{61C7D407-2DEB-4E61-BED0-C91864777975}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87D4A460-1F0E-4480-940B-B81A7D79EF4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87D4A460-1F0E-4480-940B-B81A7D79EF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C04F259C-F41C-4BD0-AD65-188098E0BB85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C04F259C-F41C-4BD0-AD65-188098E0BB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88ADB4E-BA58-42DA-8174-0176FAFB6DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88ADB4E-BA58-42DA-8174-0176FAFB6DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A002FE98-5F46-4D24-862B-9CB54F4C8F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A002FE98-5F46-4D24-862B-9CB54F4C8F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

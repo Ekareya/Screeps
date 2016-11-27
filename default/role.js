@@ -1,91 +1,108 @@
-var s = require('state');
 var a = require('action');
 var role =
-{
-    Builder:
+{    //Refactored_Zone----------------------------------------------------------------------------------------
+
+
+    //-----------------------------------------------------------------------------------------------------
+
+    //Refactor_Zone------------------------------------------------------------------------------------------
+
+    runner:
     {
-        /** @param {Creep} creep **/
+        max: 1,
         run: function (creep)
-{
-            //console.log(creep.name+":"+s.toString[creep.memory.state] + " " + creep.memory.state);
+        {
+            //RC.creepLog(creep);
             switch (creep.memory.state)
-{
-                case s.Eating:
-                    a.eating(creep, s.Building, s.Mining); break;
-                case s.Mining:
-                    a.mining(creep, s.Building, 0); break;
-                case s.Building:
-                    a.building(creep, s.Eating, s.Repairing); break;
-                case s.Repairing:
-                    a.repairing(creep, s.Eating, s.Upgrading); break;
-                case s.Upgrading:
-                    a.upgrading(creep, s.Eating); break;
+            {
+                case s.Running:
+                    a.takeIn(creep, s.Emptying, s.Leeching, FIND_STRUCTURES, { filter: struct => struct.structureType == STRUCTURE_CONTAINER }, 'withdraw'); break;
+                case s.Emptying:
+                    a.feedSpawn(creep, s.Running, s.Feeding); break;
+                case s.Leeching:
+                    a.leeching(creep, s.Emptying); break;
+                case s.Feeding:
+                    a.feeding(creep, s.Running, s.Hauling, { filter: struct => struct.structureType == STRUCTURE_TOWER && struct.energy < struct.energyCapacity }); break;
+                case s.Hauling:
+                    a.hauling(creep, s.Running); break;
                 default:
-                    creep.memory.state = 1; creep.say('bug'); a.mining(creep, s.Building, 0); break;
+                    creep.memory.state = (creep.spawning) ? '' : s.Running; break;
             }
         }
     },
 
-
-
-    Harvester:
+    sweeper:
     {
         run: function (creep)
-{
+        {
             switch (creep.memory.state)
+            {
+                case s.Running:
+                    a.takeIn(creep, s.Emptying, s.Emptying, FIND_DROPPED_ENERGY, {}, 'pickup'); break;
+                case s.Emptying:
+                    creep.memory.role = 'runner';//a.feedStorage(creep, s.Running); break;
+                default:
+                    creep.memory.state = (creep.spawning) ? '' : s.Running; break;
+            }
+        }
+    },
+
+    upgrader:
+    {
+
+        run: function (creep)
+        {
+            switch (creep.memory.state)
+            {
+                case s.Eating:
+                    a.takeIn(creep, s.Upgrading, s.Upgrading, FIND_STRUCTURES, { filter: struct => struct.structureType == STRUCTURE_CONTAINER }, 'withdraw'); break;
+                case s.Upgrading:
+                    a.upgrading(creep, s.Eating); break;
+                default:
+                    creep.memory.state = (creep.spawning) ? '' : s.Eating; break;
+            }
+        }
+    },
+    miniupgrader:
 {
+
+    run: function (creep)
+    {
+        switch (creep.memory.state)
+        {
+            case s.Eating:
+                a.takeIn(creep, s.Upgrading, s.Upgrading, FIND_STRUCTURES, { filter: struct => struct.structureType == STRUCTURE_CONTAINER }, 'withdraw'); break;
+            case s.Upgrading:
+                a.upgrading(creep, s.Eating); break;
+            default:
+                creep.memory.state = (creep.spawning) ? '' : s.Eating; break;
+        }
+    }
+},
+    harvester:
+    {
+        run: function (creep)
+        {
+            switch (creep.memory.state)
+            {
                 case s.Mining:
                     a.harvesting(creep, s.Emptying, creep.memory.source); break;
                 case s.Emptying:
-                    a.feeding(creep, s.Mining, s.Upgrading); break;
-                case s.Upgrading:
-                    a.upgrading(creep, s.Mining); break;
+                    a.feeding(creep, s.Mining, s.Mining, { filter: struct => struct.structureType == STRUCTURE_TOWER && struct.energy < struct.energyCapacity }); break;
                 default:
-                    creep.memory.state = 1; creep.say('bug'); a.mining(creep, s.Emptying, 0); break;
+                    creep.memory.state = (creep.spawning) ? '' : s.Mining; break;
             }
         }
     },
 
-    Upgrader:
+    repairer:
     {
         run: function (creep)
-{
+        {
             switch (creep.memory.state)
-{
-                case s.Mining:
-                    a.eating(creep, s.Upgrading, s.Mining); break;
-                case s.Upgrading:
-                    a.upgrading(creep, s.Mining); break;
-                default:
-                    creep.memory.state = 1; creep.say('bug'); a.mining(creep, s.Upgrading, 0); break;
-            }
-        }
-    },
-
-    Attacker:
-    {
-        run: function (creep)
-{
-            a.attacking(creep, 'E67S13');
-        }
-    },
-
-    Claimer:
-    {
-        run: function (creep)
-{
-            a.claiming(creep, 'E69S14');
-        }
-    },
-
-    Repairer:
-    {
-        run: function (creep)
-{
-            switch (creep.memory.state)
-{
+            {
                 case s.Eating:
-                    a.eating(creep, s.Building, s.Mining); break;
+                    a.takeIn(creep, s.Repairing, s.Repairing, FIND_STRUCTURES, { filter: struct => struct.structureType == STRUCTURE_CONTAINER && struct.store.energy > 0 }, 'withdraw'); break;
                 case s.Mining:
                     a.mining(creep, s.Building, 0); break;
                 case s.Repairing:
@@ -93,36 +110,64 @@ var role =
                 case s.Upgrading:
                     a.upgrading(creep, s.Eating); break;
                 default:
-                    creep.memory.state = 1; creep.say('bug'); a.mining(creep, s.Repairing, 0); break;
+                    creep.memory.state = (creep.spawning) ? '' : s.Eating; break;
             }
         }
     },
-    Runner:
+    attacker:
     {
         run: function (creep)
-{
-            //console.log(creep.name+":"+s.toString[creep.memory.state] + " " + creep.memory.state);
+        {
             switch (creep.memory.state)
-{
-                case s.Running:
-                    a.leeching(creep, s.Emptying); break;
-                case s.Emptying:
-                    a.emptying(creep, s.Running, s.Eating); break;
-                case s.Eating:
-                    a.running2(creep, s.Emptying); break;
-                case s.Sniffing:
-                    a.sniffing(creep, s.Running); break;
+            {
+                case s.Attacking: a.attacking(creep); break;
+                    //case s.Attacking: a.berzerk(creep); break;
+                    //case s.Attacking: a.raze(creep, STRUCTURE_EXTENSION); break;
+                    //case s.Attacking: a.raze(creep, STRUCTURE_WALL); break;
+                case s.Moving: a.moving(creep, 29, 10); break;
                 default:
-                    creep.memory.state = 1; creep.say('bug'); a.mining(creep, s.Emptying, 0); break;
+                    creep.memory.state = (creep.spawning) ? '' : s.Moving;
+                    creep.memory.dest = "E67S13";
+                    creep.memory.target = "583903baae40d2df107d5d20";
+                    break;
+
             }
         }
     },
-    Runner2:
+
+    hauler:
     {
         run: function (creep)
-{
-            a.running2(creep, s.Emptying);
+        {
+            a.hauling(creep, 0);
+        }
+    },
+    claimer:
+    {
+        run: function (creep)
+        {
+            a.claiming(creep, 'E67S13');
+        }
+    },
+    builder:
+    {
+        run: function (creep)
+        {
+            switch (creep.memory.state)
+            {
+                case s.Eating:
+                    a.takeIn(creep, s.Building, s.Building, FIND_STRUCTURES, { filter: struct => struct.structureType == STRUCTURE_CONTAINER }, 'withdraw'); break;
+                case s.Building:
+                    a.building(creep, s.Eating); break;
+                default:
+                    creep.memory.state = (creep.spawning) ? '' : s.Eating; break;
+
+            }
         }
     }
+    //-----------------------------------------------------------------------------------------------------
+
+
+
 }
 module.exports = role;
